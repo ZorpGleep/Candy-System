@@ -101,4 +101,24 @@ print(f"{c} x {c_name}")
 #     s.write(f"{(a*0.13) + (b * 0.14) + (c * 0.06)}|||{a} mini chupas, {b} mentos mini chupa chupas mix, {c} sour straps. Consumer paid ${paid}. Candy cost {(a*0.13) + (b * 0.14) + (c * 0.06)}. Total gain: {paid - ((a*0.13) + (b * 0.14) + (c * 0.06))}")
             
 with open("sales.csv", "a") as f: #                                                                                                                                                                                                                      
-    f.write(f'"{a_name}","{b_name}","{c_name}","{a}","{b}","{c}","{a_price_no_margin/100}","{b_price_no_margin/100}","{c_price_no_margin/100}","{a_price/100}","{b_price/100}","{c_price/100}","{shots}","{shots_in}","{max_amount/100}","{og_money/100}","{(a*a_price_no_margin)+(b*b_price_no_margin)+(c*c_price_no_margin)/100}","{(a*a_price)+(b*b_price)+(c*c_price)/100}","{player_paid-((a*a_price)+(b*b_price)+(c*c_price))/100}","{money/100}"\n')
+    f.write(f'"{a_name}",') # a name
+    f.write(f'"{b_name}",') # b name
+    f.write(f'"{c_name}",') # c name
+    f.write(f'"{a}",') # How much of a they recieved
+    f.write(f'"{b}",') # How much of b they recieved
+    f.write(f'"{c}",') # How much of c they recieved
+    f.write(f'"{a_price_no_margin / 100}",') # how much each of a cost us
+    f.write(f'"{b_price_no_margin / 100}",') # how much each of b cost us
+    f.write(f'"{c_price_no_margin / 100}",') # how much each of c cost us
+    f.write(f'"{a_price / 100}",') # how much each of a "cost" to the consumers
+    f.write(f'"{b_price / 100}",') # how much each of b "cost" to the consumers
+    f.write(f'"{c_price / 100}",') # how much each of c "cost" to the consumers
+    f.write(f'"{shots}",') # How many shots they bought
+    f.write(f'"{shots_in}",') # How many they actually got in
+    f.write(f'"{max_amount / 100}",') # What was the max amount they could get
+    f.write(f'"{og_money / 100}",') # What did they get to "spend"
+    f.write(f'"{(a * a_price_no_margin) + (b * b_price_no_margin) + (c * c_price_no_margin) / 100}",') # how much the candy cost us total
+    f.write(f'"{(a * a_price) + (b * b_price) + (c * c_price) / 100}",') # How much the consumers "spent"
+    f.write(f'"{player_paid - ((a * a_price) + (b * b_price) + (c * c_price)) / 100}",') # how much we profited
+    f.write(f'"{money / 100}",') # how much was left left over from the spree
+    f.write(f'\n')
