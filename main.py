@@ -28,19 +28,19 @@ def prize_pick(amount):
     x = print_and_ask()
     if x == "a":
         if amount > a_price-1:
-            return ["a", 13]
+            return ["a", a_price]
         else:
             print("not enough money!")
             return ["nanValue"]
     if x == "b":
         if amount > b_price-1:
-            return ["b", 14]
+            return ["b", b_price]
         else:
             print("not enough money!")
             return ["nanValue"]
     if x == "c":
         if amount > c_price-1:
-            return ["c", 6]
+            return ["c", c_price]
         else:
             print("not enough money!")
             return ["nanValue"]
@@ -57,10 +57,11 @@ if shots == 4:
 
             
 if shots == 10:
-    max_amount = 250
+    # max_amount = 250
     player_paid = 5
-    # max_amount = 7
+    max_amount = 11
     money = (shots_in / shots)*max_amount
+    og_money = money
 
 
 
@@ -99,5 +100,5 @@ print(f"{c} x {c_name}")
 #         paid = 1
 #     s.write(f"{(a*0.13) + (b * 0.14) + (c * 0.06)}|||{a} mini chupas, {b} mentos mini chupa chupas mix, {c} sour straps. Consumer paid ${paid}. Candy cost {(a*0.13) + (b * 0.14) + (c * 0.06)}. Total gain: {paid - ((a*0.13) + (b * 0.14) + (c * 0.06))}")
             
-with open("sales.csv", "a") as f:
-    f.write(f'"{a_name}","{b_name}","{c_name}","{a}","{b}","{c}","{a_price_no_margin/100}","{b_price_no_margin/100}","{c_price_no_margin/100}","{a_price/100}","{b_price/100}","{c_price/100}","{shots}","{shots_in}","{max_amount/100}","{money/100}","{(a*a_price_no_margin)+(b*b_price_no_margin)+(c*c_price_no_margin)/100}","{(a*a_price)+(b*b_price)+(c*c_price)/100}","{player_paid-((a*a_price)+(b*b_price)+(c*c_price))/100}"')
+with open("sales.csv", "a") as f: #                                                                                                                                                                                                                      
+    f.write(f'"{a_name}","{b_name}","{c_name}","{a}","{b}","{c}","{a_price_no_margin/100}","{b_price_no_margin/100}","{c_price_no_margin/100}","{a_price/100}","{b_price/100}","{c_price/100}","{shots}","{shots_in}","{max_amount/100}","{og_money/100}","{(a*a_price_no_margin)+(b*b_price_no_margin)+(c*c_price_no_margin)/100}","{(a*a_price)+(b*b_price)+(c*c_price)/100}","{player_paid-((a*a_price)+(b*b_price)+(c*c_price))/100}","{money/100}"\n')
