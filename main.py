@@ -1,3 +1,4 @@
+import typing
 shots = int(input("Shots 4 or 10:  "))
 shots_in = int(input("Amount oif shots in: "))
 a_price_no_margin = 13
@@ -12,17 +13,17 @@ a_name = "Mini chupa chups"
 b_name = "Mentos mini chupa chups mix"
 c_name = "Sour straps"
 
-def prize_pick(amount):
+def prize_pick(amount: int, cand: typing.List):
     if amount < min(a_price,b_price,c_price):
         return ["break"]
     print(f"{amount/100} left")
     def print_and_ask():
         if amount > a_price-1:
-            print(f"a: {a_name}: {a_price}")
+            print(f"{a_name} * {cand.count("a")}: {a_price}")
         if amount > b_price-1:
-            print(f"b: {b_name}: {b_price}")
+            print(f"{b_name} * {cand.count("b")}: {b_price}")
         if amount > c_price-1:
-            print(f"c: {c_name}: {c_price}")
+            print(f"{c_name} * {cand.count("c")}: {c_price}")
         x = str(input("enter option: "))
         return x
     x = print_and_ask()
@@ -47,19 +48,52 @@ def prize_pick(amount):
     print("invalid value!")
     return ["nanValue"]
             
-            
+def prize_remove(cand: typing.List) -> str:
+    def ask_and_recieve() -> str:
+        if "a" in cand:
+            print(f"a:{a_name} * {cand.count("a")}")
+        if "b" in cand:
+            print(f"b:{b_name} * {cand.count("b")}")
+        if "c" in cand:
+            print(f"c:{c_name} * {cand.count("c")}")
+        x = str(input("what to remove? (z for cancel): "))
+        return x
+    x = ask_and_recieve()
+    if x == "z":
+        return ["nanValue"]
+    if x == "a":
+        if "a" in cand:
+            return ["a"]
+        else:
+            print(f"no {a_name} in cart")
+            return ["nanValue"]
+    if x == "b":
+        if "b" in cand:
+            return ["b"]
+        else:
+            print(f"no {b_name} in cart")
+            return ["nanValue"]
+    if x == "c":
+        if c in cand:
+            return ["c"]
+        else:
+            print(f"no {c_name} in cart")
+            return ["nanValue"]
+    else:
+        print("invalid value!")
+        return ["nanValue"]
 
 
 if shots == 4:
     max_amount = 100
-    player_paid = 2
+    player_paid = 200
     money = (shots_in / shots)*max_amount
 
             
 if shots == 10:
-    # max_amount = 250
-    player_paid = 5
-    max_amount = 11
+    max_amount = 250
+    player_paid = 500
+    # max_amount = 11
     money = (shots_in / shots)*max_amount
     og_money = money
 
@@ -69,13 +103,22 @@ if shots == 10:
 
 candy = []
 while money > 0.05:
-    ret = prize_pick(money)
-    if ret[0] == "break":
-        break
-    if ret[0] == "nanValue":
+    x = str(input("remove (r) or pick (p): "))
+    if x != "r" and x != "p":
         continue
-    money = money - ret[1]
-    candy.append(ret[0])
+    if x == "p":
+        ret = prize_pick(money, candy)
+        if ret[0] == "break":
+            break
+        if ret[0] == "nanValue":
+            continue
+        money = money - ret[1]
+        candy.append(ret[0])
+    if x == "r":
+        ret = prize_remove(candy)
+        if ret[0] == ["nanValue"]:
+            continue
+        candy.remove(ret[0])
 a = 0
 b = 0
 c = 0
@@ -121,4 +164,5 @@ with open("sales.csv", "a") as f: #
     f.write(f'"{(a * a_price) + (b * b_price) + (c * c_price) / 100}",') # How much the consumers "spent"
     f.write(f'"{player_paid - ((a * a_price) + (b * b_price) + (c * c_price)) / 100}",') # how much we profited
     f.write(f'"{money / 100}",') # how much was left left over from the spree
+    f.write(f'"{player_paid/100}"') #how much the player paid to play
     f.write(f'\n')
