@@ -1,4 +1,4 @@
-import typing
+import typing # Normal
 shots = int(input("Shots 4 or 10:  "))
 shots_in = int(input("Amount oif shots in: "))
 a_price_no_margin = 13
