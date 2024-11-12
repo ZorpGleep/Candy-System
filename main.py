@@ -105,8 +105,8 @@ if shots == 8:
 
 candy = []
 while money > c_price-1:
-    x = str(input("remove (r) or pick (p): "))
-    if x != "r" and x != "p":
+    x = str(input("remove (r) or pick (p) or exit(x): "))
+    if x != "r" and x != "p" and x != "x":
         continue
     if x == "p":
         ret = prize_pick(money, candy)
@@ -121,6 +121,8 @@ while money > c_price-1:
         if ret[0] == ["nanValue"]:
             continue
         candy.remove(ret[0])
+    if x == "x":
+        break
 a = 0
 b = 0
 c = 0
