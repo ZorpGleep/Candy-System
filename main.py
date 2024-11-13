@@ -121,6 +121,12 @@ while money > c_price-1:
         if ret[0] == ["nanValue"]:
             continue
         candy.remove(ret[0])
+        if ret[0] == "a":
+            money += a_price
+        if ret[0] == "b":
+            money += b_price
+        if ret[0] == "c":
+            money += c_price
     if x == "x":
         break
 a = 0
